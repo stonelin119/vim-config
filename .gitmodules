@@ -1,0 +1,27 @@
+[submodule "jellybeans.vim"]
+	path = jellybeans.vim
+	url = https://github.com/nanotech/jellybeans.vim
+[submodule "pyflakes-pathogen"]
+	path = pyflakes-pathogen
+	url = https://github.com/mitechie/pyflakes-pathogen.git
+[submodule "snipmate-snippets"]
+	path = snipmate-snippets
+	url = https://github.com/honza/snipmate-snippets.git
+[submodule "vim-snipmate"]
+	path = vim-snipmate
+	url = https://github.com/garbas/vim-snipmate.git
+[submodule "vim-addon-mw-utils"]
+	path = vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "supertab"]
+	path = supertab
+	url = https://github.com/ervandew/supertab.git
+[submodule "ctrlp.vim"]
+	path = ctrlp.vim
+	url = https://github.com/kien/ctrlp.vim.git
+[submodule "tagbar"]
+	path = tagbar
+	url = https://github.com/majutsushi/tagbar.git
+[submodule "tlib"]
+	path = tlib
+	url = https://github.com/vim-scripts/tlib.git
