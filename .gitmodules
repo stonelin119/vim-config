@@ -25,3 +25,6 @@
 [submodule "tlib"]
 	path = tlib
 	url = https://github.com/vim-scripts/tlib.git
+[submodule "vim-powerline"]
+	path = vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git

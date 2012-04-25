@@ -1,8 +1,10 @@
 call pathogen#infect()
+call pathogen#helptags()
 syntax on
 filetype plugin indent on
 
 set nocompatible
+
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
@@ -32,8 +34,11 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-" 关闭备份
-set nobackup
+""""""""""""""""""""""""""""""
+" => vim setting
+""""""""""""""""""""""""""""""
+set guifont=Courier\ New:h12:cANSI
+colorscheme jellybeans
 
 "encoding
 set fileencodings=utf-8,gb2312,gbk,gb18030
@@ -44,15 +49,16 @@ set encoding=prc
 set guioptions-=T
 " 窗口打开时最大化
 au GUIENTER * simalt ~x
-
 " 在处理未保存或只读文件的时候，弹出确认
 set confirm
-
 " 当文件在外部有改动时，自动加载
 set autoread
-
 " 设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
+" 关闭备份
+set nobackup
+"show cmd
+set showcmd
 
 " 高亮显示查找结果
 set hlsearch
@@ -70,7 +76,6 @@ set smarttab
 " 不要用空格代替制表符
 set noexpandtab
 
-
 " 缩进
 set tabstop=4
 set softtabstop=4
@@ -86,6 +91,33 @@ set number
 set lbr
 set tw=80
 
+" 历史记录数
+set history=1000
+
+"语言设置
+set langmenu=zh_CN.UTF-8
+set helplang=cn
+
+let mapleader = ","
+let g:mapleader = ","
+
+" 我的状态行显示的内容（包括文件类型和解码）
+"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+"set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
+
+" 总是显示状态行
+set laststatus=2
+
+" set position and size
+set lines=45 columns=158
+
+" remove space end line
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Highlight end of line whitespace.
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+
 """"""""""""""""""""""""""""""
 " => Visual mode related
 """"""""""""""""""""""""""""""
@@ -97,7 +129,6 @@ vnoremap <silent> # :call VisualSearch('b')<CR>
 " When you press gv you vimgrep after the selected text
 vnoremap <silent> gv :call VisualSearch('gv')<CR>
 map <leader>g :vimgrep // **/*.<left><left><left><left><left><left><left>
-
 
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
@@ -125,49 +156,15 @@ function! VisualSearch(direction) range
     let @" = l:saved_reg
 endfunction
 
-" 历史记录数
-set history=1000
-
-"语言设置
-set langmenu=zh_CN.UTF-8
-set helplang=cn
-
-let mapleader = ","
-let g:mapleader = ","
-
-" 我的状态行显示的内容（包括文件类型和解码）
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-"set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-
-" 总是显示状态行
-"set laststatus=2
-
-" 设置背景色
-set background=dark
-colo darkblue
-
-" set position and size
-set lines=45 columns=158
-
-"show cmd
-set showcmd
-
-"打开当前目录文件列表
-:map <F3>:e .<CR>
-"按F8智能补全
-:inoremap <F8> <C-x><C-o>
-
-"vim inoremap python code
-" filetype on
-" filetype plugin on
-" filetype plugin indent on
-" :let g:pydiction_location='C:/Program Files (x86)/Vim/vimfiles/ftplugin/pydiction/complete-dict'
-" :let g:pydiction_menu_height=20
-
-" TlistToggle plugin
+""""""""""""""""""""""""""""""
+" => TlistToggle plugin
+""""""""""""""""""""""""""""""
 let g:tagbar_ctags_bin='C:\Program Files (x86)\Vim\vimfiles\bundle\ctags58\ctags.exe'
 :nmap <F9> :TagbarToggle<CR>
 
+""""""""""""""""""""""""""""""
+" => Python doc
+""""""""""""""""""""""""""""""
 let g:pydoc_cmd = "Python c:/Python27/Lib/pydoc.py"
 if has("autocmd")
 	" 设置输入点(.)时,自动弹出函数菜单
@@ -177,19 +174,12 @@ endif
 " 运行Python脚本的键盘映射
 map <F5> :!python.exe %
 
-"Grep
-nnoremap <silent> <F3> :Grep<CR>
-
-" remove space end line
-autocmd BufWritePre * :%s/\s\+$//e
-
-" Highlight end of line whitespace.
-highlight WhitespaceEOL ctermbg=red guibg=red
-match WhitespaceEOL /\s\+$/
-
-" 语法高亮
-" set font
-set guifont=Courier\ New:h12:cANSI
-colorscheme jellybeans
-
+""""""""""""""""""""""""""""""
+" => SuperTab
+""""""""""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType = "context"
+
+""""""""""""""""""""""""""""""
+" => syntastic
+""""""""""""""""""""""""""""""
+let g:syntastic_check_on_open=1
