@@ -5,10 +5,17 @@ filetype plugin indent on
 filetype on
 filetype plugin on
 
-set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
+
+set nocompatible
+" 关闭备份
+set nobackup
+" 在处理未保存或只读文件的时候，弹出确认
+set confirm
+" 当文件在外部有改动时，自动加载
+set autoread
 
 set diffexpr=MyDiff()
 function MyDiff()
@@ -35,22 +42,24 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-" 关闭备份
-set nobackup
-" 在处理未保存或只读文件的时候，弹出确认
-set confirm
-" 当文件在外部有改动时，自动加载
-set autoread
+"encoding
+set fileencodings=utf-8,gb2312,gbk,gb18030
+set termencoding=utf-8
+set encoding=prc
+
+"语言设置
+set langmenu=zh_CN.UTF-8
+set helplang=cn
 
 " 隐藏窗口
 set guioptions-=T
 " 窗口打开时最大化
 au GUIENTER * simalt ~x
-
-"encoding
-set fileencodings=utf-8,gb2312,gbk,gb18030
-set termencoding=utf-8
-set encoding=prc
+" 显示行号
+set number
+set colorcolumn=81
+" 总是显示状态行
+set laststatus=2
 
 " 设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
@@ -60,18 +69,6 @@ set hlsearch
 set incsearch
 " 替换时,使用g标签成为默认设置. 在替换时,替换本行所有符合的匹配
 set gdefault
-
-" 显示行号
-set number
-set colorcolumn=81
-" 历史记录数
-set history=1000
-"语言设置
-set langmenu=zh_CN.UTF-8
-set helplang=cn
-
-" 总是显示状态行
-set laststatus=2
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
@@ -134,18 +131,17 @@ function! VisualSearch(direction) range
 endfunction
 
 """"""""""""""""""""""""""""""
-" => pydoc
+" => python
 """"""""""""""""""""""""""""""
+" 运行Python脚本的键盘映射
+map <F5> :!python.exe %
+
 let g:pydoc_cmd = "Python c:/Python27/Lib/pydoc.py"
 if has("autocmd")
 	" 设置输入点(.)时,自动弹出函数菜单
     autocmd FileType python imap <buffer> . .<C-X><C-O><C-P>
 endif
-
-" 运行Python脚本的键盘映射
-map <F5> :!python.exe %
-
-"Pydiction
+" Pydiction
 let g:pydiction_location = 'C:\Program Files\Vim\vim73\ftplugin\complete-dict'
 
 """"""""""""""""""""""""""""""
