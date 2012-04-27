@@ -2,9 +2,10 @@ call pathogen#infect()
 call pathogen#helptags()
 syntax on
 filetype plugin indent on
+filetype on
+filetype plugin on
 
 set nocompatible
-
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
 behave mswin
@@ -34,32 +35,25 @@ function MyDiff()
   silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
-""""""""""""""""""""""""""""""
-" => vim setting
-""""""""""""""""""""""""""""""
-set guifont=Courier\ New:h12:cANSI
-colorscheme jellybeans
+" 关闭备份
+set nobackup
+" 在处理未保存或只读文件的时候，弹出确认
+set confirm
+" 当文件在外部有改动时，自动加载
+set autoread
+
+" 隐藏窗口
+set guioptions-=T
+" 窗口打开时最大化
+au GUIENTER * simalt ~x
 
 "encoding
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set termencoding=utf-8
 set encoding=prc
 
-" 隐藏窗口
-set guioptions-=T
-" 窗口打开时最大化
-au GUIENTER * simalt ~x
-" 在处理未保存或只读文件的时候，弹出确认
-set confirm
-" 当文件在外部有改动时，自动加载
-set autoread
 " 设置匹配模式，类似当输入一个左括号时会匹配相应的那个右括号
 set showmatch
-" 关闭备份
-set nobackup
-"show cmd
-set showcmd
-
 " 高亮显示查找结果
 set hlsearch
 " 增量查找
@@ -67,56 +61,39 @@ set incsearch
 " 替换时,使用g标签成为默认设置. 在替换时,替换本行所有符合的匹配
 set gdefault
 
+" 显示行号
+set number
+set colorcolumn=81
+" 历史记录数
+set history=1000
+"语言设置
+set langmenu=zh_CN.UTF-8
+set helplang=cn
+
+" 总是显示状态行
+set laststatus=2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tab键的宽度
-set expandtab
-set smarttab
-" 不要用空格代替制表符
-set noexpandtab
+" 自动缩进
+set autoindent
+set cindent
+set smartindent
 
-" 缩进
+" 统一缩进为4
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set autochdir
 
+" Tab键的宽度
+set expandtab
+set smarttab
+
 set ai "Auto indent
 set si "Smart indet
 set wrap "Wrap lines
-
-" 显示行号
-set number
-set lbr
-set tw=80
-
-" 历史记录数
-set history=1000
-
-"语言设置
-set langmenu=zh_CN.UTF-8
-set helplang=cn
-
-let mapleader = ","
-let g:mapleader = ","
-
-" 我的状态行显示的内容（包括文件类型和解码）
-"set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [POS=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
-"set statusline=[%F]%y%r%m%*%=[Line:%l/%L,Column:%c][%p%%]
-
-" 总是显示状态行
-set laststatus=2
-
-" set position and size
-set lines=45 columns=158
-
-" remove space end line
-autocmd BufWritePre * :%s/\s\+$//e
-
-" Highlight end of line whitespace.
-highlight WhitespaceEOL ctermbg=red guibg=red
-match WhitespaceEOL /\s\+$/
 
 """"""""""""""""""""""""""""""
 " => Visual mode related
@@ -157,13 +134,7 @@ function! VisualSearch(direction) range
 endfunction
 
 """"""""""""""""""""""""""""""
-" => TlistToggle plugin
-""""""""""""""""""""""""""""""
-let g:tagbar_ctags_bin='C:\Program Files (x86)\Vim\vimfiles\bundle\ctags58\ctags.exe'
-:nmap <F9> :TagbarToggle<CR>
-
-""""""""""""""""""""""""""""""
-" => Python doc
+" => pydoc
 """"""""""""""""""""""""""""""
 let g:pydoc_cmd = "Python c:/Python27/Lib/pydoc.py"
 if has("autocmd")
@@ -174,6 +145,18 @@ endif
 " 运行Python脚本的键盘映射
 map <F5> :!python.exe %
 
+"Pydiction
+let g:pydiction_location = 'C:\Program Files\Vim\vim73\ftplugin\complete-dict'
+
+""""""""""""""""""""""""""""""
+" => space end of line
+""""""""""""""""""""""""""""""
+" remove space end of line
+autocmd BufWritePre * :%s/\s\+$//e
+" highlight space end of line
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
+
 """"""""""""""""""""""""""""""
 " => SuperTab
 """"""""""""""""""""""""""""""
@@ -183,3 +166,16 @@ let g:SuperTabDefaultCompletionType = "context"
 " => syntastic
 """"""""""""""""""""""""""""""
 let g:syntastic_check_on_open=1
+
+""""""""""""""""""""""""""""""
+" => TlistToggle plugin
+""""""""""""""""""""""""""""""
+let g:tagbar_ctags_bin='C:\Program Files (x86)\Vim\vimfiles\bundle\ctags58\ctags.exe'
+:nmap <F9> :TagbarToggle<CR>
+
+""""""""""""""""""""""""""""""
+" => font
+""""""""""""""""""""""""""""""
+set background=dark
+set guifont=Courier\ New:h12:cANSI
+colorscheme jellybeans
