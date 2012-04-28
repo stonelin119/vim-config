@@ -57,7 +57,9 @@ set guioptions-=T
 au GUIENTER * simalt ~x
 " 显示行号
 set number
-set colorcolumn=81
+highlight Visual ctermfg=darkblue ctermbg=darkblue
+highlight Normal ctermfg=grey ctermbg=darkblue
+
 " 总是显示状态行
 set laststatus=2
 
@@ -154,6 +156,11 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 
 """"""""""""""""""""""""""""""
+" => autosave when leave insert
+""""""""""""""""""""""""""""""
+au InsertLeave *.* write
+
+""""""""""""""""""""""""""""""
 " => SuperTab
 """"""""""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType = "context"
@@ -164,7 +171,7 @@ let g:SuperTabDefaultCompletionType = "context"
 let g:syntastic_check_on_open=1
 
 """"""""""""""""""""""""""""""
-" => TlistToggle plugin
+" => Tagbar
 """"""""""""""""""""""""""""""
 let g:tagbar_ctags_bin='C:\Program Files (x86)\Vim\vimfiles\bundle\ctags58\ctags.exe'
 :nmap <F9> :TagbarToggle<CR>
@@ -174,4 +181,10 @@ let g:tagbar_ctags_bin='C:\Program Files (x86)\Vim\vimfiles\bundle\ctags58\ctags
 """"""""""""""""""""""""""""""
 set background=dark
 set guifont=Courier\ New:h12:cANSI
+
+""""""""""""""""""""""""""""""
+" => color
+""""""""""""""""""""""""""""""
 colorscheme jellybeans
+set colorcolumn=81
+hi ColorColumn guibg=DarkCyan
