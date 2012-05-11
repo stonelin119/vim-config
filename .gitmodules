@@ -28,3 +28,6 @@
 [submodule "vim-powerline"]
 	path = vim-powerline
 	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "pydoc.vim"]
+	path = pydoc.vim
+	url = https://github.com/vim-scripts/pydoc.vim.git

@@ -156,11 +156,6 @@ highlight WhitespaceEOL ctermbg=red guibg=red
 match WhitespaceEOL /\s\+$/
 
 """"""""""""""""""""""""""""""
-" => autosave when leave insert
-""""""""""""""""""""""""""""""
-au InsertLeave *.* write
-
-""""""""""""""""""""""""""""""
 " => SuperTab
 """"""""""""""""""""""""""""""
 let g:SuperTabDefaultCompletionType = "context"
