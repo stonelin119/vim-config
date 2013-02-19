@@ -76,22 +76,19 @@ set gdefault
 " => Text, tab and indent related
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " 自动缩进
-set autoindent
 set cindent
 set smartindent
 
 " 统一缩进为4
 set tabstop=4
-set softtabstop=4
 set shiftwidth=4
+set softtabstop=4
+set expandtab
+"set smarttab
+set autoindent
+
 set autochdir
 
-" Tab键的宽度
-set expandtab
-set smarttab
-
-set ai "Auto indent
-set si "Smart indet
 set wrap "Wrap lines
 
 """"""""""""""""""""""""""""""
